@@ -19,7 +19,7 @@ public class InventoriesRestController {
     private InventoriesService inventoriesService;
 
     @GetMapping("/")
-    public ResponseEntity getAllInventories() throws Exception {
+    public ResponseEntity getAllInventories() {
         HashMap<Object, Object> response = new HashMap<>();
         try {
             List<inventories> list = inventoriesService.getInventories();
@@ -30,8 +30,8 @@ public class InventoriesRestController {
         }
     }
 
-    @PostMapping(path = "/", consumes = "application/json", produces = "application/json")
-    public ResponseEntity addInventories(@RequestBody inventories inventories) throws Exception {
+    @PostMapping(path = "/")
+    public ResponseEntity addInventories(@RequestBody inventories inventories) {
         try {
             inventories added = inventoriesService.addInventory(inventories);
             return correctResponse(added,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
@@ -42,7 +42,7 @@ public class InventoriesRestController {
     }
 
     @PutMapping("/")
-    public ResponseEntity updateInventories(@RequestBody inventories inventories) throws Exception{
+    public ResponseEntity updateInventories(@RequestBody inventories inventories) {
         try {
             inventories added = inventoriesService.updateInventories(inventories);
             return correctResponse(added,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
@@ -53,7 +53,7 @@ public class InventoriesRestController {
     }
 
     @DeleteMapping(path = "/{parameter}")
-    public ResponseEntity deleteInventories(@PathVariable Long parameter) throws Exception {
+    public ResponseEntity deleteInventories(@PathVariable Long parameter) {
         try {
             if (inventoriesService.deleteInventories(parameter)) {
                 return correctResponse("Inventory deleted successfully",HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
@@ -67,7 +67,7 @@ public class InventoriesRestController {
     }
 
     @GetMapping(path = "/{parameter}")
-    public ResponseEntity getInventory(@PathVariable Long parameter) throws Exception {
+    public ResponseEntity getInventory(@PathVariable Long parameter) {
         try {
             inventories inv = inventoriesService.getInventory(parameter);
             return correctResponse(inv,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);

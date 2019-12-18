@@ -50,30 +50,30 @@
 
 ### Inventories
 
-* Inventories add_inventory(Inventories) :- it will add new inventory which is available in machine.
-* Inventories update_inventory(Inventories) :- it will update inventor information.
-* Inventories update_quantity_of_inventor(Integer) :- it will specifically update quantity of specified inventory.
-* Inventories delete_inventory(Inventories) :- delete inventory which is now no longer supported by vending machine.
-* List<Inventories> view_all_inventories() :- display details of all the inventories which machine supports.
-* List<Inventories> view_finished_inventories() :- display inventory that need to be refilled in exam
-* List<Inventories> view_single_inventory(Integer) :- display details of requested inventory
-* boolean check_quantity_is_empty(Integer) :- checks whether the given inventory is emptied or not.
-* boolean check_for_given_quantity(Integer inventoryID,Integer qtyToCheck) :- checks whether the inventory has requested quantity or not.
+- [x] Inventories add_inventory(Inventories) :- it will add new inventory which is available in machine.
+- [x] Inventories update_inventory(Inventories) :- it will update inventor information.
+- [x] Inventories update_quantity_of_inventor(Integer) :- it will specifically update quantity of specified inventory.
+- [x] Inventories delete_inventory(Inventories) :- delete inventory which is now no longer supported by vending machine.
+- [x] List<Inventories> view_all_inventories() :- display details of all the inventories which machine supports.
+- [x] List<Inventories> view_finished_inventories() :- display inventory that need to be refilled in exam
+- [x] List<Inventories> view_single_inventory(Integer) :- display details of requested inventory
+- [x] boolean check_quantity_is_empty(Integer) :- checks whether the given inventory is emptied or not.
+- [x] boolean check_for_given_quantity(Integer inventoryID,Integer qtyToCheck) :- checks whether the inventory has requested quantity or not.
 
 ### Beverages
 
-* Beverage add_beverage(Beverage) :- add beverage to the system
-* Beverage update_beverage(Beverage) :- update beverage to the system
-* Beverage delete_beverage(Beverage) :- delete beverage from the system
-* List<Beverage> view_beverages() :- view all beverages
-* Beverage view_single_beverage(Integer) :- display single requested beverage
-* Boolean beverage_availability(Integer) :- checks whether beverage is available or not
-* List<Beverage> view_available_beverage() :- display all the available beverages
+- [ ] Beverage add_beverage(Beverage) :- add beverage to the system
+- [ ] Beverage update_beverage(Beverage) :- update beverage to the system
+- [ ] Beverage delete_beverage(Beverage) :- delete beverage from the system
+- [ ] List<Beverage> view_beverages() :- view all beverages
+- [ ] Beverage view_single_beverage(Integer) :- display single requested beverage
+- [ ] Boolean beverage_availability(Integer) :- checks whether beverage is available or not
+- [ ] List<Beverage> view_available_beverage() :- display all the available beverages
 
 ### Ingredients
 
-* Ingredients add_Ingredients(Ingredients) :- add ingredients to the system
-* Ingredients update_Ingredients(Ingredients) :- updates ingredients to the system
-* Ingredients delete_Ingredients(Ingredients) :- delete ingredients from the system
-* List<Ingredients> view_all_Ingredients() :- displays all ingredients required for all beverage in the system
-* Items view_Ingredients_of_Beverage(Beverage) :- display items required for a given beverage
+- [ ] Ingredients add_Ingredients(Ingredients) :- add ingredients to the system
+- [ ] Ingredients update_Ingredients(Ingredients) :- updates ingredients to the system
+- [ ] Ingredients delete_Ingredients(Ingredients) :- delete ingredients from the system
+- [ ] List<Ingredients> view_all_Ingredients() :- displays all ingredients required for all beverage in the system
+- [ ] Items view_Ingredients_of_Beverage(Beverage) :- display items required for a given beverage
