@@ -72,8 +72,8 @@
 
 ### Ingredients
 
-- [ ] Ingredients add_Ingredients(Ingredients) :- add ingredients to the system
-- [ ] Ingredients update_Ingredients(Ingredients) :- updates ingredients to the system
-- [ ] Ingredients delete_Ingredients(Ingredients) :- delete ingredients from the system
-- [ ] List<Ingredients> view_all_Ingredients() :- displays all ingredients required for all beverage in the system
-- [ ] Items view_Ingredients_of_Beverage(Beverage) :- display items required for a given beverage
+- [x] Ingredients add_Ingredients(Ingredients) :- add ingredients to the system
+- [x] Ingredients update_Ingredients(Ingredients) :- updates ingredients to the system
+- [x] Ingredients delete_Ingredients(Ingredients) :- delete ingredients from the system
+- [x] List<Ingredients> view_all_Ingredients() :- displays all ingredients required for all beverage in the system
+- [x] Items view_Ingredients_of_Beverage(Beverage) :- display items required for a given beverage
