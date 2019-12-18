@@ -73,6 +73,28 @@ public class BeverageController {
         }
     }
 
+    @GetMapping("/checkAvailability/{id}")
+    public ResponseEntity checkAvailability(@PathVariable Long id) {
+        try {
+            boolean output = beverageService.checkAvailability(id);
+            return correctResponse(output,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return errorResponse(ex);
+        }
+    }
+
+    @GetMapping("/checkAvailability")
+    public ResponseEntity checkAvailability() {
+        try {
+            List<Beverage> beverageList = beverageService.checkAvailability();
+            return correctResponse(beverageList,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
+        }
+        catch (Exception ex) {
+            return errorResponse(ex);
+        }
+    }
+
     public ResponseEntity correctResponse(Object value, Object error, int statusCode, String message, HttpStatus status) {
         HashMap<Object, Object> response = new HashMap<>();
         response.put("value", value);

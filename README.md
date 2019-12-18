@@ -62,13 +62,13 @@
 
 ### Beverages
 
-- [ ] Beverage add_beverage(Beverage) :- add beverage to the system
-- [ ] Beverage update_beverage(Beverage) :- update beverage to the system
-- [ ] Beverage delete_beverage(Beverage) :- delete beverage from the system
-- [ ] List<Beverage> view_beverages() :- view all beverages
-- [ ] Beverage view_single_beverage(Integer) :- display single requested beverage
-- [ ] Boolean beverage_availability(Integer) :- checks whether beverage is available or not
-- [ ] List<Beverage> view_available_beverage() :- display all the available beverages
+- [x] Beverage add_beverage(Beverage) :- add beverage to the system
+- [x] Beverage update_beverage(Beverage) :- update beverage to the system
+- [x] Beverage delete_beverage(Beverage) :- delete beverage from the system
+- [x] List<Beverage> view_beverages() :- view all beverages
+- [x] Beverage view_single_beverage(Integer) :- display single requested beverage
+- [x] Boolean beverage_availability(Integer) :- checks whether beverage is available or not
+- [x] List<Beverage> view_available_beverage() :- display all the available beverages
 
 ### Ingredients
 

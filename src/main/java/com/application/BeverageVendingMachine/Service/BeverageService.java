@@ -50,4 +50,17 @@ public class BeverageService {
         beverageRepository.delete(beverage);
         return true;
     }
+
+    public boolean checkAvailability(Long id) throws Exception {
+        Beverage beverage = getBeverage(id);
+        return beverage.isAvailable();
+    }
+
+    public List<Beverage> checkAvailability() throws Exception {
+        List<Beverage> beverageList = getBeverages();
+        beverageList.removeIf(beverage -> (!beverage.isAvailable()));
+        if(beverageList.isEmpty())
+            throw new Exception("No Beverages are available");
+        return beverageList;
+    }
 }
