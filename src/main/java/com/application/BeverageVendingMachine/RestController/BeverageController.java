@@ -2,6 +2,7 @@ package com.application.BeverageVendingMachine.RestController;
 
 import com.application.BeverageVendingMachine.Entity.Beverage;
 import com.application.BeverageVendingMachine.Entity.Ingredients;
+import com.application.BeverageVendingMachine.Entity.inventories;
 import com.application.BeverageVendingMachine.Service.BeverageService;
 import com.application.BeverageVendingMachine.Service.InventoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,9 +111,10 @@ public class BeverageController {
                 Beverage beverage = beverageService.getBeverage(id);
                 List<Ingredients> ingredientsList = beverage.getIngredients();
                 for(Ingredients i : ingredientsList) {
-                    inventoriesService.reduceInventories(i.getInventories(),i.getQuantityRequired());
+                    inventories inventories = inventoriesService.reduceInventories(i.getInventories(),i.getQuantityRequired());
+                    inventoriesService.updateInventories(inventories);
                 }
-                beverage = beverageService.updateBeverage(beverageService.toggleAvailability(beverage));
+                beverageService.updateList();
                 return correctResponse(beverage,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
             }
         }

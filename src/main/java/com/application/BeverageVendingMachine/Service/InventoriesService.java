@@ -18,13 +18,14 @@ public class InventoriesService {
         if(inventories == null) {
             throw new Exception("No inventory received");
         }
-        inventories inventories1 = inventoriesRepository.save(inventories);
-        return inventories1;
+        if(inventories.getName() == null || inventories.getQuantity() == null)
+            throw new Exception("Some value(s) are missing, Kindly refer to the manual");
+        return inventoriesRepository.save(inventories);
     }
 
     public List<inventories> getInventories() throws Exception {
         List<inventories> listOfInventories = inventoriesRepository.findAll();
-        if(listOfInventories == null) {
+        if(listOfInventories.isEmpty()) {
             throw new Exception("NO Inventories Found");
         }
         return listOfInventories;
@@ -34,9 +35,7 @@ public class InventoriesService {
         if(inventories == null) {
             throw new Exception("No inventory received");
         }
-        inventories inventories1 = inventoriesRepository.findById(inventories.getInventoryId()).get();
-        if(inventories1 == null)
-            throw new Exception("No such inventory exist");
+        inventories inventories1 = getInventory(inventories.getInventoryId());
 
         if(inventories.getName() == null)
             inventories.setName(inventories1.getName());
@@ -48,12 +47,9 @@ public class InventoriesService {
     }
 
     public boolean deleteInventories(Long id) throws Exception {
-        Optional<inventories> inventories = inventoriesRepository.findById(id);
-        if(!inventories.isPresent()) {
-            return false;
-        }
+        inventories inventories = getInventory(id);
         try {
-            inventoriesRepository.delete(inventories.get());
+            inventoriesRepository.delete(inventories);
             return true;
         }
         catch (Exception ex) {
@@ -64,17 +60,14 @@ public class InventoriesService {
     public inventories getInventory(Long id) throws Exception {
         Optional<inventories> inventories = inventoriesRepository.findById(id);
         if(!inventories.isPresent())
-            throw new Exception("Inventory doesn't exist");
+            throw new Exception("No such inventory exist");
         return inventories.get();
     }
 
     public inventories updateQuantity(Long inventoryId, Integer quantity) throws Exception {
-        Optional<inventories> inventories = inventoriesRepository.findById(inventoryId);
-        if(!inventories.isPresent())
-            throw new Exception("No such inventory exist");
-        inventories inventories1 = inventories.get();
-        inventories1.setQuantity(inventories1.getQuantity() + quantity);
-        return inventoriesRepository.save(inventories1);
+        inventories inventories = getInventory(inventoryId);
+        inventories.setQuantity(inventories.getQuantity() + quantity);
+        return inventoriesRepository.save(inventories);
     }
 
     public boolean checkEmpty(Long inventoryId) throws Exception {

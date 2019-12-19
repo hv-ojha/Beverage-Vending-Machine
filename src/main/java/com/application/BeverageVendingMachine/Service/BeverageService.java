@@ -18,7 +18,7 @@ public class BeverageService {
     public Beverage addBeverage(Beverage beverage) throws Exception {
         if(beverage == null)
             throw new Exception("No Beverage Sent");
-        if(beverage.getName() == null || beverage.getIngredients() == null)
+        if(beverage.getName() == null)
             throw new Exception("Some value(s) are missing, Please check the manual properly");
         return beverageRepository.save(beverage);
     }
@@ -75,6 +75,13 @@ public class BeverageService {
                 break;
             }
         }
-        return beverage;
+        return beverageRepository.save(beverage);
+    }
+
+    public void updateList() throws Exception {
+        List<Beverage> beverageList = checkAvailability();
+        for(Beverage b : beverageList) {
+            toggleAvailability(b);
+        }
     }
 }
