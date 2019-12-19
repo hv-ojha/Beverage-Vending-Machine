@@ -1,6 +1,7 @@
 package com.application.BeverageVendingMachine.Service;
 
 import com.application.BeverageVendingMachine.Entity.Beverage;
+import com.application.BeverageVendingMachine.Entity.Ingredients;
 import com.application.BeverageVendingMachine.Repository.BeverageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class BeverageService {
     public Beverage addBeverage(Beverage beverage) throws Exception {
         if(beverage == null)
             throw new Exception("No Beverage Sent");
-        if(beverage.getName() == null)
+        if(beverage.getName() == null || beverage.getIngredients() == null)
             throw new Exception("Some value(s) are missing, Please check the manual properly");
         return beverageRepository.save(beverage);
     }
@@ -28,6 +29,8 @@ public class BeverageService {
             throw new Exception("No such Beverage exist");
         if(beverage.getName() == null)
             beverage.setName(beverage1.getName());
+        if(beverage.getIngredients() == null)
+            beverage.setIngredients(beverage1.getIngredients());
         return beverageRepository.save(beverage);
     }
 
@@ -62,5 +65,16 @@ public class BeverageService {
         if(beverageList.isEmpty())
             throw new Exception("No Beverages are available");
         return beverageList;
+    }
+
+    public Beverage toggleAvailability(Beverage beverage) throws Exception {
+        List<Ingredients> ingredientsList = beverage.getIngredients();
+        for(Ingredients i : ingredientsList) {
+            if(i.getInventories().getQuantity() < i.getQuantityRequired()) {
+                beverage.setAvailable(false);
+                break;
+            }
+        }
+        return beverage;
     }
 }

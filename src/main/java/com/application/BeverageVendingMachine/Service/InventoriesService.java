@@ -109,4 +109,9 @@ public class InventoriesService {
             throw new Exception("Unexpected Error");
         }
     }
+
+    public inventories reduceInventories(inventories inventories, Integer reduction) {
+        inventories.setQuantity(Math.abs(inventories.getQuantity() - reduction));
+        return inventoriesRepository.save(inventories);
+    }
 }

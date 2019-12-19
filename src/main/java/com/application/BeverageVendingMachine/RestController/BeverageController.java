@@ -1,7 +1,9 @@
 package com.application.BeverageVendingMachine.RestController;
 
 import com.application.BeverageVendingMachine.Entity.Beverage;
+import com.application.BeverageVendingMachine.Entity.Ingredients;
 import com.application.BeverageVendingMachine.Service.BeverageService;
+import com.application.BeverageVendingMachine.Service.InventoriesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,11 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 
 @RestController
-@RequestMapping("/beverage")
 public class BeverageController {
 
     @Autowired
     private BeverageService beverageService;
+
+    @Autowired
+    private InventoriesService inventoriesService;
 
     @GetMapping("/")
     public ResponseEntity getAllBeverages() {
@@ -73,7 +77,7 @@ public class BeverageController {
         }
     }
 
-    @GetMapping("/checkAvailability/{id}")
+    @GetMapping("/available/{id}")
     public ResponseEntity checkAvailability(@PathVariable Long id) {
         try {
             boolean output = beverageService.checkAvailability(id);
@@ -84,13 +88,35 @@ public class BeverageController {
         }
     }
 
-    @GetMapping("/checkAvailability")
+    @GetMapping("/available")
     public ResponseEntity checkAvailability() {
         try {
             List<Beverage> beverageList = beverageService.checkAvailability();
             return correctResponse(beverageList,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
         }
         catch (Exception ex) {
+            return errorResponse(ex);
+        }
+    }
+
+    @GetMapping("/order/{id}")
+    public ResponseEntity orderBeverage(@PathVariable Long id) {
+        try {
+            if(!beverageService.checkAvailability(id)) {
+                List<Beverage> beverageList = beverageService.checkAvailability();
+                return correctResponse(beverageList,HttpStatus.BAD_REQUEST,HttpStatus.BAD_REQUEST.value(),"Requested Beverage is not available. Here are the beverages which are available",HttpStatus.BAD_REQUEST);
+            }
+            else {
+                Beverage beverage = beverageService.getBeverage(id);
+                List<Ingredients> ingredientsList = beverage.getIngredients();
+                for(Ingredients i : ingredientsList) {
+                    inventoriesService.reduceInventories(i.getInventories(),i.getQuantityRequired());
+                }
+                beverage = beverageService.updateBeverage(beverageService.toggleAvailability(beverage));
+                return correctResponse(beverage,HttpStatus.OK,HttpStatus.OK.value(),"Success",HttpStatus.OK);
+            }
+        }
+        catch(Exception ex) {
             return errorResponse(ex);
         }
     }
